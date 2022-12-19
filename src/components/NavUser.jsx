@@ -39,7 +39,7 @@ export default function NavUser() {
           </Link>
         </Nav.Link>
         <Nav.Link className="align-item-center justify-content-center me-5 pe-5 fw-bolder text-primer">
-          <NavDropdown title={profilToggle} className="text-primer">
+          <NavDropdown title={profilToggle} className="text-primer" align="end">
             <Dropdown.Item className="text-primer">
               <Link to="/profile" className="text-primer text-decoration-none">
                 {profileVector}

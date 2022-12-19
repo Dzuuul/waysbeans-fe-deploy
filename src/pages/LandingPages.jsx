@@ -25,7 +25,7 @@ export default function LandingPages() {
   console.log(products);
 
   return (
-    <div>
+    <>
       <NavbarAuth setShow={setShow} show={show} />
       <Container className="mt-5 pt-5 container-fluid">
         <Card className="bgWhite imageHome">
@@ -47,6 +47,6 @@ export default function LandingPages() {
           ))}
         </Row>
       </Container>
-    </div>
+    </>
   );
 }

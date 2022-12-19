@@ -123,9 +123,9 @@ export default function Auth() {
       <Button className="me-2 btn-log" onClick={handleShow}>
         Login
       </Button>
-      <Modal show={show} onHide={handleClose} centered>
+      <Modal show={show} onHide={handleClose} centered size="sm">
         <Modal.Body closebutton="true">
-          <h1 className="text-login mb-4">Login</h1>
+          <h1 className="text-login mb-4 px-2">Login</h1>
           <Form onSubmit={(e) => handleSubmit.mutate(e)}>
             {message && message}
             <Form.Control
@@ -133,25 +133,26 @@ export default function Auth() {
               type="email"
               id="email"
               name="email"
-              placeholder="type your email"
+              placeholder="Email"
               onChange={handleChange}
+              autoFocus
             />
             <Form.Control
               className="mb-3 form-Input"
               type="password"
               id="password"
               name="password"
-              placeholder="type your password"
+              placeholder="Password"
               onChange={handleChange}
             />
             <Button type="submit" className="w-100 mb-3 btn-authlogin">
               Submit
             </Button>
           </Form>
-          <p>
-            Don't have an account? please{" "}
+          <p className="text-center">
+            Don't have an account? click{" "}
             <strong className="point" onClick={switchRegister}>
-              Register
+              here
             </strong>
           </p>
         </Modal.Body>
@@ -160,7 +161,7 @@ export default function Auth() {
       <Button className="me-5 btn-login" onClick={handleShows}>
         Register
       </Button>
-      <Modal show={shows} onHide={handleCloses} centered>
+      <Modal show={shows} onHide={handleCloses} centered size="sm">
         <Modal.Body closebutton="true">
           <h1 className="text-login mb-4">Register</h1>
           <Form onSubmit={(e) => handleSubmitRegister.mutate(e)}>
@@ -170,15 +171,16 @@ export default function Auth() {
               type="text"
               id="name"
               name="name"
-              placeholder="type your name"
+              placeholder="Full Name"
               onChange={handleChangeRegister}
+              autoFocus
             />
             <Form.Control
               className="mb-3 form-Input"
               type="email"
               id="email"
               name="email"
-              placeholder="type your email"
+              placeholder="Email"
               onChange={handleChangeRegister}
             />
             <Form.Control
@@ -186,17 +188,17 @@ export default function Auth() {
               type="password"
               id="password"
               name="password"
-              placeholder="type your password"
+              placeholder="Password"
               onChange={handleChangeRegister}
             />
             <Button type="submit" className="w-100 mb-3 btn-authlogin">
               Submit
             </Button>
           </Form>
-          <p>
-            Don't have an account? please{" "}
+          <p className="text-center">
+            Don't have an account? click{" "}
             <strong className="point" onClick={switchLogin}>
-              Login
+              here
             </strong>
           </p>
         </Modal.Body>

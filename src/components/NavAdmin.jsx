@@ -38,7 +38,7 @@ export default function NavAdmin() {
           </NavbarBrand>
           <Nav>
             <Nav.Link className="align-item-center justify-content-center me-5 pe-5 fw-bolder text-primer">
-              <NavDropdown title={profilToggle}>
+              <NavDropdown title={profilToggle} align="end">
                 <Dropdown.Item className="text-danger">
                   <Link
                     to="/add-product"

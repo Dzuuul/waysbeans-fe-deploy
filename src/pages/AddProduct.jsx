@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import NavAdmin from "../components/NavAdmin";
 import paperclip from "../assets/paperclip.png";
+import noPreview from "../assets/nopreviewproduct.png"
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 import { API } from "../config/api";
@@ -123,7 +124,7 @@ export default function AddProduct() {
                         htmlFor="inputgroupfile2"
                         style={{ width: "100%", borderRadius: "5px" }}
                       >
-                        {labelName === "" ? "Add Product" : labelName}
+                        {labelName === "" ? "Add Product Image" : labelName}
                         <img src={paperclip} alt="" className="" />
                       </label>
                     </div>
@@ -138,13 +139,20 @@ export default function AddProduct() {
                 </Form>
               </Col>
               <Col xs={12} md={5}>
-                {viewLabel && (
+                {viewLabel === null ? 
+                  <img
+                    src={noPreview}
+                    alt="view"
+                    style={{ width: "70%", borderRadius: "10px", marginLeft: "80px" }}
+                  />
+                :
                   <img
                     src={viewLabel}
                     alt="view"
-                    style={{ width: "70%", borderRadius: "10px" }}
+                    style={{ width: "70%", borderRadius: "10px", marginLeft: "50px" }}
                   />
-                )}
+                }
+                
               </Col>
             </Row>
           </Col>

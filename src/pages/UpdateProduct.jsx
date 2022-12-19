@@ -154,7 +154,7 @@ export default function UpdateProduct() {
                         htmlFor="inputgroupfile2"
                         style={{ width: "100%", borderRadius: "5px" }}
                       >
-                        {labelName === "" ? "Add Product" : labelName}
+                        {labelName === "" ? "Add Product Image" : labelName}
                         <img src={paperclip} alt="" className="" />
                       </label>
                     </div>
@@ -164,7 +164,7 @@ export default function UpdateProduct() {
                     style={{ width: "100%" }}
                     type="submit"
                   >
-                    Update Product
+                    {handleSubmit.isLoading ? "Updating your product..." : "Update Product"}
                   </Button>
                 </Form>
               </Col>
