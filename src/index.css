@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+.brownColor {
+  color: #613d2b !important;
+}
+
 .bgWhite {
   border: none !important;
 }
@@ -58,9 +62,9 @@ code {
 }
 
 .btn-login:hover {
-  background-color: white !important;
-  color: #613d2b !important;
-  border: solid 3px #613d2b !important;
+  background-color: #3e2414 !important;
+  color: white !important;
+  border: solid 3px #3e2414 !important;
 }
 
 .btn-authlogin {

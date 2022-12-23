@@ -16,7 +16,6 @@ export default function LandingPages() {
   const [state] = useContext(UserContext); //user data
   const handleClick = () => setShow(true);
 
-  console.log(state.user);
 
   let { data: products } = useQuery("productsCache", async () => {
     const response = await API.get("/products");

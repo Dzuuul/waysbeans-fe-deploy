@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import NavbarAuth from "../components/Navbar";
 import iconDelete from "../assets/trash.png";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "react-query";
 import { API } from "../config/api";
 import convertRupiah from "rupiah-format";
+import emptyCart from "../assets/emptyCart.png";
 
 export default function Cart() {
   const title = "Cart";
@@ -130,112 +131,131 @@ export default function Cart() {
     await API.patch("/cart", body, config);
   });
 
-  console.log(cart);
+  console.log("Cart = ", cart);
+  console.log("Cart Length = ", cart?.length);
   return (
     <div>
       <NavbarAuth />
-      <Container className="pt-5 mt-5">
-        <h1 className="text-primer fw-bold mb-3"> My Cart</h1>
-        <p className="text-primer2">Review Your Order</p>
-        <Row className="justify-content-between">
-          <Col md={8}>
-            <div className="lines my-3" />
-            <Container className="justify-content-between ">
-              {cart?.map((item, index) => (
-                <Row style={{ fontSize: 14 }}>
-                  <Col md={8} className="d-flex">
-                    <div
-                      className="rounded"
-                      style={{
-                        width: 80,
-                        height: 80,
-                        marginRight: 13,
-                        marginBottom: 29,
-                      }}
-                    >
-                      <img
-                        src={item?.product?.Image}
+      {cart?.length === 0 ? (
+        <>
+          <Container className="pt-5 mt-5 d-flex justify-content-center">
+            <img src={emptyCart} className="w-50 mt-5" alt="Empty Cart" />
+          </Container>
+          <Container className="d-flex justify-content-center">
+            <p className="fw-bold fs-2 brownColor">Your Cart is Empty</p>
+          </Container>
+          <Container className="d-flex justify-content-center">
+            <Link to="/">
+              <Button className="btn-login w-100">Buy Coffe Beans</Button>
+            </Link>
+          </Container>
+        </>
+      ) : (
+        <Container className="pt-5 mt-5">
+          <h1 className="text-primer fw-bold mb-3"> My Cart</h1>
+          <p className="text-primer2">Review Your Order</p>
+          <Row className="justify-content-between">
+            <Col md={8}>
+              <div className="lines my-3" />
+              <Container className="justify-content-between ">
+                {cart?.map((item, index) => (
+                  <Row style={{ fontSize: 14 }}>
+                    <Col md={8} className="d-flex">
+                      <div
                         className="rounded"
-                        alt="img"
-                        style={{ width: "100%" }}
-                      />
-                    </div>
-                    <div>
-                      <p className="text-primer" style={{ fontWeight: 900 }}>
-                        {item?.product?.Title}
+                        style={{
+                          width: 80,
+                          height: 80,
+                          marginRight: 13,
+                          marginBottom: 29,
+                        }}
+                      >
+                        <img
+                          src={item?.product?.Image}
+                          className="rounded"
+                          alt="img"
+                          style={{ width: "100%" }}
+                        />
+                      </div>
+                      <div>
+                        <p className="text-primer" style={{ fontWeight: 900 }}>
+                          {item?.product?.Title}
+                        </p>
+                        <Button
+                          className="btn-increase fw-bold rounded-circle"
+                          onClick={() => decreaseCart(item.id)}
+                        >
+                          -
+                        </Button>
+                        <p className="d-inline mx-3 text-primer">{item.qty}</p>
+                        <Button
+                          className="btn-increase fw-bold rounded-circle"
+                          onClick={() => increaseCart(item.id)}
+                        >
+                          +
+                        </Button>
+                      </div>
+                    </Col>
+                    <Col
+                      md={4}
+                      className="justify-content-end"
+                      style={{ textAlign: "end" }}
+                    >
+                      <p className="text-primer">
+                        {convertRupiah.convert(
+                          item?.qty * item?.product?.Price
+                        )}
                       </p>
-                      <Button
-                        className="btn-increase fw-bold rounded-circle"
-                        onClick={() => decreaseCart(item.id)}
-                      >
-                        -
-                      </Button>
-                      <p className="d-inline mx-3 text-primer">{item.qty}</p>
-                      <Button
-                        className="btn-increase fw-bold rounded-circle"
-                        onClick={() => increaseCart(item.id)}
-                      >
-                        +
-                      </Button>
-                    </div>
-                  </Col>
-                  <Col
-                    md={4}
-                    className="justify-content-end"
-                    style={{ textAlign: "end" }}
-                  >
-                    <p className="text-primer">
-                      {convertRupiah.convert(item?.qty * item?.product?.Price)}
-                    </p>
-                    <img
-                      src={iconDelete}
-                      alt="img"
-                      onClick={() => handleDelete(item.id)}
-                      style={{ cursor: "pointer", width: 16, height: 20 }}
-                    />
-                  </Col>
-                </Row>
-              ))}
-            </Container>
-            <div className="lines my-3" />
-          </Col>
+                      <img
+                        src={iconDelete}
+                        alt="img"
+                        onClick={() => handleDelete(item.id)}
+                        style={{ cursor: "pointer", width: 16, height: 20 }}
+                      />
+                    </Col>
+                  </Row>
+                ))}
+              </Container>
+              <div className="lines my-3" />
+            </Col>
 
-          <Col md={4} className="text-center">
-            <div className="lines my-3" />
-            <Row>
-              <Col>
-                <p className="text-primer">Subtotal</p>
-                <p className="text-primer">QTY</p>
-              </Col>
-              <Col>
-                <p className="text-primer">
-                  {convertRupiah.convert(resultTotal)}
-                </p>
-                <p className="text-primer">{resultQty}</p>
-              </Col>
-            </Row>
-            <div className="lines my-3" />
-            <Row className="fw-bolder">
-              <Col>
-                <p className="text-primer">Total</p>
-              </Col>
-              <Col>
-                <p className="text-primer">
-                  {convertRupiah.convert(resultTotal)}
-                </p>
-              </Col>
-            </Row>
-            <Button
-              className="btn-authlogin w-100"
-              type="submit"
-              onClick={(e) => handleSubmit.mutate(e)}
-            >
-              {" "}
-              PAY
-            </Button>
-          </Col>
-        </Row>
-      </Container>
+            <Col md={4} className="text-center">
+              <div className="lines my-3" />
+              <Row>
+                <Col>
+                  <p className="text-primer">Subtotal</p>
+                  <p className="text-primer">QTY</p>
+                </Col>
+                <Col>
+                  <p className="text-primer">
+                    {convertRupiah.convert(resultTotal)}
+                  </p>
+                  <p className="text-primer">{resultQty}</p>
+                </Col>
+              </Row>
+              <div className="lines my-3" />
+              <Row className="fw-bolder">
+                <Col>
+                  <p className="text-primer">Total</p>
+                </Col>
+                <Col>
+                  <p className="text-primer">
+                    {convertRupiah.convert(resultTotal)}
+                  </p>
+                </Col>
+              </Row>
+              <Button
+                className="btn-authlogin w-100"
+                type="submit"
+                onClick={(e) => handleSubmit.mutate(e)}
+              >
+                {" "}
+                PAY
+              </Button>
+            </Col>
+          </Row>
+        </Container>
+      )}
     </div>
   );
 }

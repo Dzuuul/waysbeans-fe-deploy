@@ -146,7 +146,7 @@ export default function Auth() {
               onChange={handleChange}
             />
             <Button type="submit" className="w-100 mb-3 btn-authlogin">
-              Submit
+              Login
             </Button>
           </Form>
           <p className="text-center">
@@ -192,7 +192,7 @@ export default function Auth() {
               onChange={handleChangeRegister}
             />
             <Button type="submit" className="w-100 mb-3 btn-authlogin">
-              Submit
+              Register
             </Button>
           </Form>
           <p className="text-center">
