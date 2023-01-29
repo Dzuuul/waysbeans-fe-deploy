@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const API = axios.create({
-  baseURL: process.env.REACT_APP_BASEURL,
+  baseURL: "http://ec2-18-181-215-107.ap-northeast-1.compute.amazonaws.com:5000/waysbeans/",
   // baseURL: "http://localhost:5000/waysbeans/",
 });
 
